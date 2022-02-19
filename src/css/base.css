@@ -381,7 +381,7 @@ main::after {
 	cursor: not-allowed;
 }
 
-.content__nav-wrap::before,
+/* .content__nav-wrap::before,
 .content__nav-wrap::after {
 	content: '';
 	position: absolute;
@@ -390,7 +390,7 @@ main::after {
 	width: 7px;
 	height: 10px;
 	background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNyIgaGVpZ2h0PSIxMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNiAwIDEgNWw1IDUiIHN0cm9rZT0iIzAwMCIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==");
-}
+} */
 
 .content__nav-wrap::before {
 	left: 0;
