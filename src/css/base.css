@@ -273,7 +273,6 @@ main::after {
 }
 
 .column__item-caption {
-	text-transform: uppercase;
 	padding: 0 3vw;
 	margin-top: 0.5rem;
 }
