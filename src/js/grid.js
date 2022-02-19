@@ -129,7 +129,7 @@ export class Grid {
         gsap.killTweensOf([gridItem.DOM.img.outer, gridItem.DOM.img.inner]);
         gsap.timeline({
           defaults: {
-            duration: 1.4,
+            duration: 1.2,
             ease: 'expo'
           },
           onComplete: () => gsap.set([gridItem.DOM.img.outer, gridItem.DOM.img.inner], {
@@ -154,7 +154,7 @@ export class Grid {
         gsap.killTweensOf([gridItem.DOM.img.outer, gridItem.DOM.img.inner]);
         gsap.timeline({
           defaults: {
-            duration: 1.4,
+            duration: 1.2,
             ease: 'expo'
           },
           onComplete: () => gsap.set([gridItem.DOM.img.outer, gridItem.DOM.img.inner], {
@@ -223,7 +223,7 @@ export class Grid {
     gsap.killTweensOf([gridItem.DOM.img.outer, gridItem.DOM.img.inner]);
     this.timeline = gsap.timeline({
       defaults: {
-        duration: 1.4,
+        duration: 1.2,
         ease: 'expo.inOut'
       },
       // overflow hidden
@@ -307,7 +307,7 @@ export class Grid {
     const gridItem = this.gridItemArr[this.currentGridItem];
     gsap.timeline({
       defaults: {
-        duration: 1.4,
+        duration: 1.2,
         ease: 'expo.inOut'
       },
       // overflow hidden

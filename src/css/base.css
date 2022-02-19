@@ -31,6 +31,10 @@ body {
 	overflow: hidden !important;
 }
 
+.loading {
+	overflow: hidden;
+}
+
 /* Page Loader */
 .js .loading::before,
 .js .loading::after {
@@ -220,7 +224,7 @@ main::after {
 	z-index: 1;
 	display: flex;
 	flex-direction: column;
-	padding: 5vh 0 15vh;
+	padding: 4vh 0 15vh;
 }
 
 .column-wrap--height {
@@ -509,7 +513,7 @@ main::after {
 	}
 
 	.column__item-imgwrap {
-		margin: 5vw 2.75vw 0;
+		margin: 4vw 2.75vw 0;
 	}
 
 	.column__item-caption {
