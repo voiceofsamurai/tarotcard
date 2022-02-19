@@ -1,7 +1,7 @@
 /**
  * Class representing a content item (.content__item).
  */
- export class ContentItem {
+export class ContentItem {
   // DOM elements
   DOM = {
     // Main element (.content__item)
