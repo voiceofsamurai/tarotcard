@@ -11,13 +11,13 @@
 body {
 	margin: 0;
 	--color-text: #000;
-	--color-bg: #fbab00;
+	--color-bg: #fcee0a;
 	--color-link: #000;
 	--color-link-hover: #000;
 	--color-heading: #111;
 	color: var(--color-text);
 	background-color: var(--color-bg);
-	font-family: nimbus-sans, sans-serif;
+	font-family: 'Volkhov', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	--ratio: 0.5;
@@ -185,7 +185,7 @@ main::after {
 	font-size: 12.25vw;
 	z-index: 1000;
 	pointer-events: none;
-	font-family: meno-banner, serif;
+	font-family: 'Volkhov', serif;
 	font-weight: 300;
 	text-transform: uppercase;
 	line-height: 1;
@@ -248,6 +248,10 @@ main::after {
 	margin: 0;
 	position: relative;
 	z-index: 1;
+}
+
+.column__item-titleBG {
+	background: #00f0ff;
 }
 
 .column__item-imgwrap {
@@ -317,10 +321,9 @@ main::after {
 	grid-area: title;
 	margin: 1rem 0 0 1.5rem;
 	justify-self: center;
-	font-family: meno-banner, serif;
+	font-family: 'Volkhov', sans-serif;
 	font-weight: 300;
-	font-style: italic;
-	font-size: 9vh;
+	font-size: 7vh;
 	white-space: nowrap;
 	transform-origin: 50% 80%;
 	will-change: transform, opacity;
