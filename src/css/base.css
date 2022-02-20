@@ -25,6 +25,7 @@ body {
 	--grid-item-width: calc(var(--grid-item-height) * var(--ratio));
 	--thumb-height: 5vw;
 	--thumb-width: calc(var(--thumb-height) * var(--ratio));
+	user-select: none;
 }
 
 .oh {
@@ -334,7 +335,6 @@ main::after {
 
 .content__item-text {
 	opacity: 0;
-	/* text-transform: uppercase; */
 	grid-area: text;
 	display: flex;
 	flex-direction: column;
@@ -342,6 +342,7 @@ main::after {
 	padding: 0 1.5rem 1.5rem;
 	text-align: right;
 	margin: auto 0 0 auto;
+	user-select: text;
 }
 
 .content__item-text::before {

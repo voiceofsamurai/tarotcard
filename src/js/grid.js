@@ -142,8 +142,8 @@ export class Grid {
           scaleX: 0.9
         }, 'start').to(gridItem.DOM.img.inner, {
           ease: 'power4',
-          scaleY: 1.3,
-          scaleX: 1.3
+          scaleY: 1.2,
+          scaleX: 1.2
         }, 'start');
       });
       // Hovering out will reverse the scale values.
