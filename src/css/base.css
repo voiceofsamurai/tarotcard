@@ -437,7 +437,7 @@ main::after {
 .button-back:hover,
 .button-back:focus {
 	outline: none;
-	stroke: #823725;
+	stroke: #00f0ff;
 }
 
 
