@@ -1,5 +1,5 @@
 {
-  "name": "columnscroll",
+  "name": "tarotcard",
   "version": "1.0.0",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "description": "",
@@ -12,14 +12,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/codrops/[NAME].git"
+    "url": "git://github.com/voiceofsamurai/[NAME].git"
   },
   "keywords": [],
-  "author": "Codrops",
   "license": "MIT",
-  "homepage": "https://tympanus.net/codrops",
+  "homepage": "https://voiceofsamurai.github.io",
   "bugs": {
-    "url": "https://github.com/codrops/[NAME]/issues"
+    "url": "https://github.com/tarotcard/[NAME]/issues"
   },
   "dependencies": {
     "gsap": "^3.8.0",
