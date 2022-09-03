@@ -3,81 +3,47 @@ import LocomotiveScroll from "locomotive-scroll";
 import { GridItem } from "./gridItem";
 import { ContentItem } from "./contentItem";
 import { gsap } from "gsap";
-// body element
 const bodyEl = document.body;
-// Calculate the viewport size
 let winsize = calcWinsize();
 window.addEventListener("resize", () => (winsize = calcWinsize()));
-/**
- * Class representing a grid of items
- */
+
 export class Grid {
-  // DOM elements
   DOM = {
-    // main element (.columns)
     el: null,
-    // The .column elements (odd columns) that eill animate to the opposite scroll direction
     oddColumns: null,
-    // .column__item
     gridItems: null,
-    // .content
     content: document.querySelector(".content"),
-    // .content__item
     contentItems: document.querySelectorAll(".content__item"),
-    // .heading
     heading: {
       top: document.querySelector(".heading--up"),
       bottom: document.querySelector(".heading--down"),
     },
-    // .button-back button
     backCtrl: document.querySelector(".button-back"),
-    // .content__nav
     contentNav: document.querySelector(".content__nav"),
-    // For demo purposes only (proof of concept).
-    // .content__nav-item
     contentNavItems: document.querySelectorAll(".content__nav-item"),
   };
-  // GridItem instances array.
   gridItemArr = [];
-  // Index of current GridItem.
   currentGridItem = -1;
-  // Checks if in grid mode or if in content mode.
   isGridView = true;
-  // Checks for active animation.
   isAnimating = false;
-  // Scroll cached value
   lastscroll = 0;
-  /**
-   * Constructor.
-   * @param {Element} DOM_el - the .columns element
-   */
   constructor(DOM_el) {
     this.DOM.el = DOM_el;
-    // first and third columns
     this.DOM.oddColumns = [...this.DOM.el.querySelectorAll(".column")].filter(
       (_, index) => index != 1
     );
-    // grid items (figure.column__item)
     this.DOM.gridItems = [...this.DOM.el.querySelectorAll(".column__item")];
-    // Assign a ContentItem to each GridItem
     this.DOM.gridItems.forEach((gridItem) => {
       const newItem = new GridItem(gridItem);
       this.gridItemArr.push(newItem);
-      // The ContentItem instance
       newItem.contentItem = new ContentItem(
         this.DOM.contentItems[newItem.position]
       );
     });
-    // Initialize the Locomotive scroll
     this.initSmoothScroll();
-    // Initialize the events on the page.
     this.initEvents();
-    // Track which items are visible
     this.trackVisibleItems();
   }
-  /**
-   * Initialize the Locomotive scroll.
-   */
   initSmoothScroll() {
     this.lscroll = new LocomotiveScroll({
       el: this.DOM.el,
@@ -90,7 +56,6 @@ export class Grid {
         smooth: true,
       },
     });
-    // Locomotive scroll event: translate the first and third grid column -1*scrollValue px.
     this.lscroll.on("scroll", (obj) => {
       this.lastscroll = obj.scroll.y;
       this.DOM.oddColumns.forEach(
@@ -98,13 +63,8 @@ export class Grid {
       );
     });
   }
-  /**
-   * Initialize the events.
-   */
   initEvents() {
-    // For every GridItem
     for (const [position, gridItem] of this.gridItemArr.entries()) {
-      // Open the gridItem and reveal its content
       gridItem.DOM.img.outer.addEventListener("click", () => {
         if (
           !this.isGridView ||
@@ -115,13 +75,10 @@ export class Grid {
         }
         this.isAnimating = true;
         this.isGridView = false;
-        // Update currentGridItem
         this.currentGridItem = position;
-        // Stop/Destroy the Locomotive scroll
         this.lscroll.destroy();
         this.showContent(gridItem);
       });
-      // Hovering on the grid item's image outer.
       gridItem.DOM.img.outer.addEventListener("mouseenter", () => {
         if (!this.isGridView || this.isAnimating) {
           return false;
@@ -164,7 +121,6 @@ export class Grid {
             "start"
           );
       });
-      // Hovering out will reverse the scale values.
       gridItem.DOM.img.outer.addEventListener("mouseleave", () => {
         if (!this.isGridView || this.isAnimating) {
           return false;
@@ -198,19 +154,16 @@ export class Grid {
           );
       });
     }
-    // Recalculate current image transform
     window.addEventListener("resize", () => {
       if (this.isGridView) {
         return false;
       }
-      // Calculate the transform to apply to the current grid item image
       const imageTransform = this.calcTransformImage();
       gsap.set(this.gridItemArr[this.currentGridItem].DOM.img.outer, {
         scale: imageTransform.scale,
         x: imageTransform.x,
         y: imageTransform.y,
       });
-      // Adjust the transform value for all the other grid items that moved to the thumbnails area.
       for (const [
         position,
         viewportGridItem,
@@ -223,14 +176,12 @@ export class Grid {
         });
       }
     });
-    // Close the current item's content and reveal back the grid.
     this.DOM.backCtrl.addEventListener("click", () => {
       if (this.isGridView || this.isAnimating) {
         return false;
       }
       this.isAnimating = true;
       this.isGridView = true;
-      // Restart the Locomotive scroll
       this.initSmoothScroll();
       this.lscroll.scrollTo(this.lastscroll, {
         duration: 0,
@@ -239,24 +190,16 @@ export class Grid {
       this.closeContent();
     });
   }
-  /**
-   * Scale up the image and reveal its content.
-   * @param {GridItem} gridItem - the gridItem element.
-   */
   showContent(gridItem) {
-    // All the other (that are inside the viewport)
     this.viewportGridItems = this.gridItemArr.filter(
       (el) => el != gridItem && el.DOM.el.classList.contains("in-view")
     );
-    // Remaining (not in the viewport)
     this.remainingGridItems = this.gridItemArr
       .filter((el) => !this.viewportGridItems.includes(el) && el != gridItem)
       .map((gridItem) => gridItem.DOM.el);
-    // image outer elements
     this.viewportGridItemsImgOuter = this.viewportGridItems.map(
       (gridItem) => gridItem.DOM.img.outer
     );
-    // Calculate the transform to apply to the gridItem's image .
     const imageTransform = this.calcTransformImage();
     gsap.killTweensOf([gridItem.DOM.img.outer, gridItem.DOM.img.inner]);
     this.timeline = gsap
@@ -265,10 +208,8 @@ export class Grid {
           duration: 1.2,
           ease: "expo.inOut",
         },
-        // overflow hidden
         onStart: () => bodyEl.classList.add("oh"),
         onComplete: () => {
-          // Hide all other grid items from the grid.
           gsap.set(this.remainingGridItems, {
             opacity: 0,
           });
@@ -406,11 +347,7 @@ export class Grid {
         "showContent"
       );
   }
-  /**
-   * Scale down the image and reveal the grid again.
-   */
   closeContent() {
-    // Current grid item
     const gridItem = this.gridItemArr[this.currentGridItem];
     gsap
       .timeline({
@@ -418,9 +355,7 @@ export class Grid {
           duration: 1.2,
           ease: "expo.inOut",
         },
-        // overflow hidden
         onStart: () => {
-          // Show all other grid items in the grid.
           gsap.set(this.remainingGridItems, {
             opacity: 1,
           });
@@ -512,22 +447,11 @@ export class Grid {
         "showGrid"
       );
   }
-  /**
-   * Calculates the scale value to apply to the images that animate to the .content__nav area (scale down to the size of a nav area item).
-   * @param {Element} gridItemImageOuter - the gridItem image outer element.
-   * @return {Number} the scale value.
-   */
   getFinalScaleValue(gridItemImageOuter) {
     return (
       this.DOM.contentNavItems[0].offsetHeight / gridItemImageOuter.offsetHeight
     );
   }
-  /**
-   * Calculates the translate value to apply to the images that animate to the .content__nav area (position it on the nav area).
-   * @param {Element} gridItemImageOuter - the gridItem image outer element.
-   * @param {Number} position - the gridItem's position.
-   * @return {JSON} the translation values.
-   */
   getFinalTranslationValue(gridItemImageOuter, position) {
     const imgrect = adjustedBoundingRect(gridItemImageOuter);
     const navrect = adjustedBoundingRect(this.DOM.contentNavItems[position]);
@@ -536,11 +460,6 @@ export class Grid {
       y: navrect.top + navrect.height / 2 - (imgrect.top + imgrect.height / 2),
     };
   }
-  /**
-   * Track which items are visible (inside the viewport)
-   * by adding/removing the 'in-view' class when scrolling.
-   * This will be used to animate only the ones that are visible.
-   */
   trackVisibleItems() {
     const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
@@ -553,11 +472,6 @@ export class Grid {
     });
     this.DOM.gridItems.forEach((item) => observer.observe(item));
   }
-  /**
-   * Calculates the scale and translation values to apply to the images when we click on it (scale up and center it).
-   * Also used to recalculate those values on resize.
-   * @return {JSON} the translation and scale values
-   */
   calcTransformImage() {
     const imgrect = adjustedBoundingRect(
       this.gridItemArr[this.currentGridItem].DOM.img.outer

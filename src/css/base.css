@@ -17,7 +17,7 @@ body {
   --color-heading: #111;
   color: var(--color-text);
   background-color: var(--color-bg);
-  font-family: 'Volkhov', sans-serif;
+  font-family: "Volkhov", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --ratio: 0.5;
@@ -39,7 +39,7 @@ body {
 /* Page Loader */
 .js .loading::before,
 .js .loading::after {
-  content: '';
+  content: "";
   position: fixed;
   z-index: 5000;
 }
@@ -62,7 +62,6 @@ body {
   opacity: 0.4;
   background: var(--color-link);
   animation: loaderAnim 0.7s linear infinite alternate forwards;
-
 }
 
 @keyframes loaderAnim {
@@ -123,7 +122,7 @@ main {
 }
 
 main::after {
-  content: '';
+  content: "";
   z-index: 1000;
   pointer-events: none;
   background: linear-gradient(to bottom, var(--color-bg), transparent);
@@ -142,8 +141,9 @@ main::after {
   display: grid;
   grid-template-rows: auto auto;
   grid-template-columns: 1fr auto;
-  grid-template-areas: 'title menu'
-    'links links';
+  grid-template-areas:
+    "title menu"
+    "links links";
 }
 
 .frame__title {
@@ -190,7 +190,7 @@ main::after {
   font-size: 12.25vw;
   z-index: 1000;
   pointer-events: none;
-  font-family: 'Volkhov', serif;
+  font-family: "Volkhov", serif;
   font-weight: 300;
   text-transform: uppercase;
   line-height: 1;
@@ -293,10 +293,11 @@ main::after {
   display: grid;
   grid-template-rows: 9rem 1fr calc(70vh - var(--thumb-height) - 1.6rem) 1fr;
   grid-template-columns: 100%;
-  grid-template-areas: '...'
-    'back'
-    'content'
-    'nav';
+  grid-template-areas:
+    "..."
+    "back"
+    "content"
+    "nav";
 }
 
 .view-content .content {
@@ -325,7 +326,7 @@ main::after {
   grid-area: title;
   margin: 1rem 0 0 1.5rem;
   justify-self: center;
-  font-family: 'Volkhov', sans-serif;
+  font-family: "Volkhov", sans-serif;
   font-weight: 300;
   font-size: 7vh;
   white-space: nowrap;
@@ -346,7 +347,7 @@ main::after {
 }
 
 .content__item-text::before {
-  content: '';
+  content: "";
   z-index: 1000;
   pointer-events: none;
   background: linear-gradient(to top, var(--color-bg), transparent);
@@ -440,7 +441,6 @@ main::after {
   stroke: #00f0ff;
 }
 
-
 @media screen and (min-width: 53em) {
   :root {
     font-size: 16px;
@@ -471,8 +471,8 @@ main::after {
     grid-template-columns: 50% 50%;
     grid-template-rows: auto auto;
     grid-template-areas:
-      'title menu'
-      'links ...';
+      "title menu"
+      "links ...";
   }
 
   .frame__title {
@@ -530,19 +530,20 @@ main::after {
     padding: 0;
     grid-template-rows: 15vh 70vh 1fr;
     grid-template-columns: 1fr 1fr calc(70vh * var(--ratio)) 1fr 1fr;
-    grid-template-areas: '... ... content content content'
-      '... back content content content'
-      '... nav nav nav ...';
-
+    grid-template-areas:
+      "... ... content content content"
+      "... back content content content"
+      "... nav nav nav ...";
   }
 
   .content__item {
     display: grid;
     grid-template-rows: 15vh 1fr 35%;
     grid-template-columns: calc(42vh) 1fr;
-    grid-template-areas: 'title ...'
-      'image text'
-      'image text';
+    grid-template-areas:
+      "title ..."
+      "image text"
+      "image text";
     text-align: left;
   }
 
